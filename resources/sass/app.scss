@@ -1,0 +1,38 @@
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+
+@import "volt";
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+@import "datatables.net-select-bs5/css/select.bootstrap5.css";
+
+.invalid-feedback {
+    display: block;
+}
+
+.main {
+    min-height: calc(100vh - 180px);
+}
+
+.table > :not(:first-child) {
+    border-top: 0;
+}
+select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+    padding: 0.5em !important;
+    font-size: 1em !important;
+}
+
+select::after {
+    content: "";
+}
