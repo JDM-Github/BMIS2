@@ -16,9 +16,7 @@ class BaranggayCertificateController extends Controller
     public function __invoke($id)
     {
         $certificate = BaranggayCertificate::where('request_document_id', $id)->first();
-
         $pdf = Pdf::loadView('pdf.brgy-certificate', compact('certificate'));
-
         return $pdf->stream('brgy-certificate.pdf');
     }
 }

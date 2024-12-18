@@ -1,37 +1,3 @@
-{{-- <div class="card-body">
-                <form method="GET" action="{{ route('request-documents.index') }}"
-                    class="mb-3 d-flex align-items-center justify-content-between">
-                    @csrf
-                    <div class="mr-2 me-3">
-                        <input type="text" name="document_name2" id="document_name2" class="form-control"
-                            value="{{ request('document_name2') }}" placeholder="Search by Document Name">
-                    </div>
-
-                    <div class="d-flex">
-                        <div class="mr-2 me-3">
-                            <select name="status" id="status" class="form-control">
-                                <option value="">All</option>
-                                <option value="0" {{ request('status') == 0 ? 'selected' : '' }}>Pending</option>
-                                <option value="1" {{ request('status') == 1 ? 'selected' : '' }}>Accepted</option>
-                                <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>Rejected</option>
-                                <option value="3" {{ request('status') == 3 ? 'selected' : '' }}>Expired</option>
-                            </select>
-                        </div>
-
-                        <div class="mr-2 me-3">
-                            <input type="text" name="schedule" id="schedule" class="form-control"
-                                value="{{ request('schedule') }}" placeholder="Search by Schedule">
-                        </div>
-
-                        <div class="mr-2 me-3">
-                            <input type="text" name="valid_until" id="valid_until" class="form-control"
-                                value="{{ request('valid_until') }}" placeholder="Search by Valid Until">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Apply Filters</button>
-                    </div>
-                </form>
-            </div> --}}
 @extends('layouts.app')
 
 @section('content')
@@ -81,6 +47,17 @@
                         </div>
 
                         <div class="mr-2 me-3">
+                            <select name="archivedStatus" id="archivedStatus" class="form-control">
+                                <option value="2" {{ request('archivedStatus') == 2 ? 'selected' : '' }}>All
+                                </option>
+                                <option value="0" {{ request('archivedStatus') == 0 ? 'selected' : '' }}>Active
+                                </option>
+                                <option value="1" {{ request('archivedStatus') == 1 ? 'selected' : '' }}>Archived
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mr-2 me-3">
                             <input type="text" name="schedule" id="schedule" class="form-control"
                                 value="{{ request('schedule') }}" placeholder="Search by Schedule">
                         </div>
@@ -93,9 +70,9 @@
                         <button type="submit" class="btn btn-primary">Apply Filters</button>
                     </div>
                 </form>
-            </div>
-            <div class="card card-body border-0 shadow table-wrapper table-responsive">
-                {{ $dataTable->table() }}
+                <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                    {{ $dataTable->table() }}
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +85,8 @@
 
     {{-- REJECT REQUEST DOCUMENT --}}
     @include('document.modals.reject')
+    @include('document.modals.archive')
+    @include('document.modals.unarchive')
 @endsection
 
 @push('scripts')
@@ -131,6 +110,14 @@
                 $('.rejectBtn').click(function() {
                     $('#reject-form').attr('action', '/reject-document/' + $(this).data(
                         'document'));
+                });
+
+                $('.archiveBtn').click(function() {
+                    $('#archive-form').attr('action', '/archive-resident-document/' + $(this).data(
+                        'document'));
+                    $('#unarchive-form').attr('action', '/unarchive-resident-document/' + $(this)
+                        .data(
+                            'document'));
                 });
             });
 

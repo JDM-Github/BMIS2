@@ -10,6 +10,8 @@ use App\Http\Controllers\CertificateOfResidencyController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DocumentAction\AcceptRequestDocumentController;
 use App\Http\Controllers\DocumentAction\RejectRequestDocumentController;
+use App\Http\Controllers\DocumentAction\ArchiveDocumentController;
+use App\Http\Controllers\DocumentAction\UnArchiveDocumentController;
 use App\Http\Controllers\FencingPermitController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HouseController;
@@ -18,10 +20,15 @@ use App\Http\Controllers\MedicalLegalCertificateController;
 use App\Http\Controllers\RequestDocumentController;
 use App\Http\Controllers\RequestForBuildingConstructionController;
 use App\Http\Controllers\ResidentAction\AcceptResidentController;
+use App\Http\Controllers\ResidentAction\ArchiveUserController;
+use App\Http\Controllers\ResidentAction\ArchiveWalkInController;
 use App\Http\Controllers\ResidentAction\RejectResidentController;
+use App\Http\Controllers\ResidentAction\UnArchiveUserController;
+use App\Http\Controllers\ResidentAction\UnArchiveWalkInController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\UserFeedBackController;
 use App\Http\Controllers\UserIndexFeedbackController;
+use App\Http\Controllers\WalkInController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
@@ -38,6 +45,11 @@ Auth::routes(
         'verify' => true
     ]
 );
+
+Route::get('/request-documents', [RequestDocumentController::class, 'index'])->name('request-documents.index');
+// Route::put('archive-document/{resident}', ArchiveWalkInController::class)->name('archive');
+// Route::put('unarchive-document/{resident}', UnArchiveWalkInController::class)->name('unarchive');
+
 
 Route::middleware(['auth', 'verified', 'check_user_status'])->group(function () {
 
@@ -57,7 +69,6 @@ Route::middleware(['auth', 'verified', 'check_user_status'])->group(function () 
         // Route::post('/request-document', RequestDocumentController::class)->name('getnotif');
 
         Route::view('about', 'about')->name('about');
-        Route::get('/request-documents', [RequestDocumentController::class, 'index'])->name('request-documents.index');
 
 
         // DOCUMENTS
@@ -92,7 +103,7 @@ Route::middleware(['auth', 'verified', 'check_user_status'])->group(function () 
 
     Route::middleware('role:admin')->group(function () {
         Route::get('user-feedback', UserIndexFeedbackController::class)->name('feedback');
-        Route::get('/request-documents', [RequestDocumentController::class, 'index'])->name('request-documents.index');
+        // Route::get('/request-documents', [RequestDocumentController::class, 'index'])->name('request-documents.index');
 
         // PDF
         Route::get('brgy-certificate/{id}', BaranggayCertificateController::class)->name('brgy-certificate');
@@ -112,15 +123,25 @@ Route::middleware(['auth', 'verified', 'check_user_status'])->group(function () 
         Route::resources([
             'resident' => ResidentController::class,
             'house' => HouseController::class,
+            'walkin' => WalkInController::class,
         ]);
 
         // DOCUMENT ACTION
         Route::put('accept-document/{requestDocument}', AcceptRequestDocumentController::class)->name('accept-document');
         Route::put('reject-document/{requestDocument}', RejectRequestDocumentController::class)->name('reject-document');
+        Route::put('archive-resident-document/{requestDocument}', ArchiveDocumentController::class)->name('archive');
+        Route::put('unarchive-resident-document/{requestDocument}', UnArchiveDocumentController::class)->name('unarchive');
 
         // RESIDENT ACTION
         Route::put('accept/{resident}', AcceptResidentController::class)->name('accept');
         Route::put('reject/{resident}', RejectResidentController::class)->name('reject');
+
+        // RESIDENT ACTION
+        Route::put('archive-document/{resident}', ArchiveWalkInController::class)->name('archive');
+        Route::put('unarchive-document/{resident}', UnArchiveWalkInController::class)->name('unarchive');
+
+        Route::put('archive-user/{resident}', ArchiveUserController::class)->name('archive');
+        Route::put('unarchive-user/{resident}', UnArchiveUserController::class)->name('unarchive');
 
         Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
         Route::get('/bulletins/create', [BulletinController::class, 'create'])->name('bulletin.create');

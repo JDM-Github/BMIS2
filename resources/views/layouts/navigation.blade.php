@@ -110,6 +110,14 @@
                 <span class="sidebar-text">{{ __('Appointment') }}</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('walkin.index') ? 'is-active' : '' }}">
+            <a href="{{ route('walkin.index') }}" class="nav-link">
+                <span class="sidebar-icon me-3">
+                    <i class="fas fa-pen-to-square mx-1"></i>
+                </span>
+                <span class="sidebar-text">{{ __('Walk In') }}</span>
+            </a>
+        </li>
 
         <li class="nav-item {{ request()->routeIs('feedback') ? 'is-active' : '' }}">
             <a href="{{ route('feedback') }}" class="nav-link">

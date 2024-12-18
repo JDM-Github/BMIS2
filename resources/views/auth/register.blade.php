@@ -283,6 +283,56 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group mb-4">
+                                <label for="disability_type">{{ __('Disability Type') }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-wheelchair"></i>
+                                    </span>
+                                    <select name="disability_type" id="disability_type" class="form-control" required>
+                                        <option value="" disabled>{{ __('Select Disability Type') }}
+                                        </option>
+                                        <option value="None" selected
+                                            {{ old('disability_type') == 'None' ? 'selected' : '' }}>
+                                            {{ __('None') }}</option>
+                                        <option value="Physical Disability"
+                                            {{ old('disability_type') == 'Physical Disability' ? 'selected' : '' }}>
+                                            {{ __('Physical Disability') }}</option>
+                                        <option value="Visual Disability"
+                                            {{ old('disability_type') == 'Visual Disability' ? 'selected' : '' }}>
+                                            {{ __('Visual Disability') }}</option>
+                                        <option value="Hearing Disability"
+                                            {{ old('disability_type') == 'Hearing Disability' ? 'selected' : '' }}>
+                                            {{ __('Hearing Disability') }}</option>
+                                        <option value="Speech and Language Impairment"
+                                            {{ old('disability_type') == 'Speech and Language Impairment' ? 'selected' : '' }}>
+                                            {{ __('Speech and Language Impairment') }}</option>
+                                        <option value="Intellectual Disability"
+                                            {{ old('disability_type') == 'Intellectual Disability' ? 'selected' : '' }}>
+                                            {{ __('Intellectual Disability') }}</option>
+                                        <option value="Psychosocial Disability"
+                                            {{ old('disability_type') == 'Psychosocial Disability' ? 'selected' : '' }}>
+                                            {{ __('Psychosocial Disability') }}</option>
+                                        <option value="Learning Disability"
+                                            {{ old('disability_type') == 'Learning Disability' ? 'selected' : '' }}>
+                                            {{ __('Learning Disability') }}</option>
+                                        <option value="Chronic Illness-Related Disability"
+                                            {{ old('disability_type') == 'Chronic Illness-Related Disability' ? 'selected' : '' }}>
+                                            {{ __('Chronic Illness-Related Disability') }}</option>
+                                        <option value="Multiple Disabilities"
+                                            {{ old('disability_type') == 'Multiple Disabilities' ? 'selected' : '' }}>
+                                            {{ __('Multiple Disabilities') }}</option>
+                                        <option value="Other Disabilities"
+                                            {{ old('disability_type') == 'Other Disabilities' ? 'selected' : '' }}>
+                                            {{ __('Other Disabilities') }}</option>
+                                    </select>
+                                </div>
+                                @error('disability_type')
+                                    <div class="invalid-feedback"> {{ $message }} </div>
+                                @enderror
+                            </div>
+
+
 
                             <!-- Form -->
 

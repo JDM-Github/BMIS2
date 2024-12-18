@@ -167,6 +167,13 @@ class HomeController extends Controller
         $femaleCount = User::role($role)->where('status', true)->where('gender', 'female')->count();
         $otherGenderCount = User::role($role)->where('status', true)->where('gender', 'others')->count();
 
+        $totalCount = $maleCount + $femaleCount + $otherGenderCount;
+        $pwdCount = $totalCount > 0 ? $totalCount - User::role($role)->where('status', true)->where('pwd', 'None')->count() : 0;
+
+        $malePercentage = $totalCount > 0 ? round(($maleCount / $totalCount) * 100, 2) : 0;
+        $femalePercentage = $totalCount > 0 ? round(($femaleCount / $totalCount) * 100, 2) : 0;
+        $otherGenderPercentage = $totalCount > 0 ? round(($otherGenderCount / $totalCount) * 100, 2) : 0;
+
         $pendingDocument = RequestDocument::where('status', 0)->count();
         $blotterRecordCount = BlotterRecord::count();
 

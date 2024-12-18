@@ -13,7 +13,7 @@ class HouseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(HouseDataTable $houseDataTable): JsonResponse | View
+    public function index(HouseDataTable $houseDataTable): JsonResponse|View
     {
         return $houseDataTable->render('house.index');
     }
@@ -21,7 +21,7 @@ class HouseController extends Controller
     /**
      * Display the specified resource.
      */
-     public function show(House $house): JsonResponse | View
+    public function show(House $house): JsonResponse|View
     {
         return response()->json($house);
     }

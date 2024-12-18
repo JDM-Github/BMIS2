@@ -30,6 +30,12 @@
         <i class="fa-solid fa-times"></i>
     </button>
 @endif
+<button class="btn btn-{{ $document->isArchived ? 'success' : 'danger' }} archiveBtn"
+    data-bs-target="#{{ $document->isArchived ? 'unarchiveModal' : 'archiveModal' }}" data-bs-toggle="modal"
+    data-document="{{ $document->id }}">
+    <i class="fa-solid fa-{{ $document->isArchived ? 'undo-alt' : 'archive' }}"></i>
+    {{ $document->isArchived ? 'Unarchive' : 'Archive' }}
+</button>
 
 @admin
     <a href="{{ $documentUrl }}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>

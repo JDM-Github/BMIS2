@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,7 +19,8 @@ return new class extends Migration
             $table->string('barangay')->nullable();         // Added barangay
             $table->string('municipality')->nullable();     // Added municipality
             $table->string('province')->nullable();         // Added province
-            
+            $table->boolean('isArchived')->default(false);
+
             $table->timestamps();
         });
     }

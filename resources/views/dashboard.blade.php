@@ -114,7 +114,7 @@
             <div class="col-md-12 mb-3">
                 <div class="card shadow-lg border-light" style="background-color: #a3044822">
                     <div class="card-body">
-                        <div class="row">
+                        {{-- <div class="row">
                             <!-- User Growth -->
                             <div class="col-lg-6 col-md-12 mb-4">
                                 <div class="card shadow-sm border-light h-100">
@@ -156,7 +156,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <!-- Active vs Inactive Residents -->
@@ -201,7 +201,7 @@
                             <div class="col-lg-6 col-md-12 mb-4">
                                 <div class="card shadow-sm border-light h-100">
                                     <div class="card-header text-center" style="color: white;">
-                                        <h6>User Growth - Chart</h6>
+                                        <h6>User Engagement - Chart</h6>
                                     </div>
                                     <div class="card-body">
                                         <canvas id="userGrowthChart"></canvas>
@@ -374,19 +374,6 @@
                         beginAtZero: true
                     }
                 }
-            }
-        });
-
-        var servicesUsageChart = new Chart(servicesUsageCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Used Services', 'Remaining Services'],
-                datasets: [{
-                    label: 'Services Usage',
-                    data: [{{ $servicesUsage }}, 100 - {{ $servicesUsage }}],
-                    backgroundColor: ['#28a745', '#dc3545'],
-                    borderWidth: 1
-                }]
             }
         });
     </script>

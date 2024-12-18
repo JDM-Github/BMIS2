@@ -17,7 +17,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class RequestDocumentDataTable extends DataTable
 {
-   
+
 
     /**
      * Build the DataTable class.
@@ -35,6 +35,7 @@ class RequestDocumentDataTable extends DataTable
         } else {
             $query->where('user_id', auth()->id());
         }
+
         if ($status = request('status')) {
             $query->where('status', $status);
         }
@@ -47,10 +48,10 @@ class RequestDocumentDataTable extends DataTable
         if ($validUntil = request('valid_until')) {
             $query->where('valid_until', 'like', "%{$validUntil}%");
         }
-
+        if (request('archivedStatus') != 2)
+            $query->where('isArchived', request('archivedStatus'));
         return $query;
     }
-
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -59,10 +60,10 @@ class RequestDocumentDataTable extends DataTable
             ->addColumn('action', fn(RequestDocument $document) => view('document.components.action', compact('document')))
             ->editColumn('status', function (RequestDocument $requestDocument) {
                 return match ($requestDocument->status) {
-                    0 => 'Pending',
-                    1 => 'Accepted',
-                    2 => 'Rejected',
-                    3 => 'Expired',
+                    "0" => 'Pending',
+                    "1" => 'Accepted',
+                    "2" => 'Rejected',
+                    "3" => 'Expired',
                 };
             })
             ->editColumn('schedule', fn(RequestDocument $requestDocument) => $requestDocument->schedule ?? 'No Action Yet')
@@ -103,7 +104,6 @@ class RequestDocumentDataTable extends DataTable
         if (auth()->user()->isAdmin()) {
             $columns[] = Column::make('user.name', 'user.name');
         }
-
         $columns[] = Column::make('document_name', 'document_name');
         $columns[] = Column::make('schedule');
         $columns[] = Column::make('valid_until', 'valid_until');

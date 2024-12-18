@@ -86,6 +86,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'number_of_years' => $data['number_of_years'],
             'password' => Hash::make($data['password']),
+            'pwd' => $data['disability_type'],
             'id_pic' => $data['id_pic']->store('idPicture', 'public'),
         ]);
 

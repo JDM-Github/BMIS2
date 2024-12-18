@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\ResidentAction;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequestDocument;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class RejectResidentController extends Controller
+class UnArchiveUserController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,10 +17,10 @@ class RejectResidentController extends Controller
     {
         $resident->update(
             [
-                'status' => false,
+                'isArchived' => true,
             ]
         );
-        flash()->success('Resident Rejected Successfully!');
+        flash()->success('User Successfully Archived!');
         return redirect()->route('resident.index');
     }
 }

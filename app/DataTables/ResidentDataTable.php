@@ -71,7 +71,7 @@ class ResidentDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('name'),
+            Column::make('user.name'),
             Column::make('email'),
             Column::make('gender'),
             Column::make('status'),

@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,6 +19,7 @@ return new class extends Migration
             $table->date('schedule')->nullable();
             $table->date('valid_until')->nullable();
             $table->integer('is_announce')->nullable();
+            $table->boolean('isArchived')->default(false);
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
 
